@@ -73,9 +73,11 @@ class LoginActivity : AppCompatActivity() {
     private fun Viewauth() {
         auth.auth.observe(this, { value ->
             if (value){
+                alertFinal.hideLoading()
                 authent()
             }else{
                 alert()
+                alertFinal.hideLoading()
             }
         })
     }
