@@ -16,4 +16,9 @@ class LocalStorage(context: Context): Storage {
     override fun clearToken() {
         return sharedPref.edit().remove(TOKEN_KEY).apply()
     }
+
+    override fun authUsers(): Boolean {
+        val token = getToken()
+        return token != ""
+    }
 }

@@ -33,14 +33,9 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
-        val message = activity?.intent?.getStringExtra(AlarmClock.EXTRA_MESSAGE)
-        textView.apply {
-            text = message
-        }
-        println(message)
-        /*homeViewModel.text.observe(viewLifecycleOwner, Observer {
+        homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
-        })*/
+        })
         return root
     }
 

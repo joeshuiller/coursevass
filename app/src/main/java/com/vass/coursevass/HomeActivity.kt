@@ -3,12 +3,10 @@ package com.vass.coursevass
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager
+import android.view.*
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -27,6 +25,7 @@ import com.vass.coursevass.network.service.db.LoginDto
 import com.vass.coursevass.network.service.db.RegistrationDto
 import com.vass.coursevass.storage.LocalStorage
 import com.vass.coursevass.storage.Storage
+import com.vass.coursevass.viewmodel.serviceViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -39,8 +38,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     @Inject
     lateinit var storage: Storage
-    @Inject
-    lateinit var userService: UserService
+    private val userService: serviceViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         @Suppress("DEPRECATION")
@@ -74,6 +72,7 @@ class HomeActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         autentication()
+
         // Get the Intent that started this activity and extract the string
     }
 
@@ -82,47 +81,29 @@ class HomeActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.home, menu)
         return true
     }
-    fun autentication(){
-        GlobalScope.launch {
-            val userServiceGetUsersResponse = userService.getUsersList()
-            if (userServiceGetUsersResponse.isSuccessful){
-                Log.d("Listo", "Storage token= ${userServiceGetUsersResponse.body()}")
-            }else{
-                alert("Unauthenticated user", "Error")
-            }
-            val saveUserResponse = userService.saveUser(
-                RegistrationDto(
-                    "Janes Saenz Puerta",
-                    "janes.saenz@vasslatam.com",
-                    "Jasapu21*"
-                )
-            )
-            if (saveUserResponse.isSuccessful){
-                Log.d("Developer", "Created user: ${saveUserResponse.body()}")
-            }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.action_settings -> onLogout()
+            else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun onLogout(): Boolean {
+        storage.clearToken()
+        finish()
+        return true
+    }
+
+    fun autentication(){
+        userService.listUsers()
+        userService.createUsers("Janes Saenz Puerta",
+            "janes.saenz@vasslatam.com",
+            "Jasapu21*")
     }
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_home)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
 
-    }
-    private fun alert(messages: String, title: String){
-        var dialog: AlertDialog? = null
-        val builder = AlertDialog.Builder(this)
-        //set message for alert dialog
-        val view = layoutInflater.inflate(R.layout.alert, null)
-        val tvTitle: TextView = view.findViewById(R.id.title_alert)
-        val tvDetail: TextView = view.findViewById(R.id.text_alert)
-        val btDone: Button = view.findViewById(R.id.button_alert)
-        tvDetail.text = messages
-        tvTitle.text = title
-        btDone.setOnClickListener(View.OnClickListener {
-            dialog?.dismiss()
-        })
-        builder.setView(view)
-        // create and show the alert dialog
-        dialog = builder.create()
-        dialog.show()
     }
 }
