@@ -1,8 +1,8 @@
 package com.vass.coursevass.di
 
 import android.content.Context
-import com.vass.coursevass.network.AlertBuild
-import com.vass.coursevass.network.service.AlertService
+import com.vass.coursevass.utils.AlertBuild
+import com.vass.coursevass.utils.AlertService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.vass.coursevass.network
+package com.vass.coursevass.utils
 
 import android.app.Dialog
 import android.content.Context
@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.vass.coursevass.R
-import com.vass.coursevass.network.service.AlertService
 
 class AlertBuild(context: Context): AlertService {
     private  val context =  context

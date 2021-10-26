@@ -1,4 +1,4 @@
-package com.vass.coursevass.network.service
+package com.vass.coursevass.utils
 
 interface AlertService {
     fun createAlert(messages: String, title: String)
