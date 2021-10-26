@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
         }
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        Viewauth()
         _binding.buttonFinal.setOnClickListener {
             sendMessage()
         }
@@ -47,7 +47,6 @@ class LoginActivity : AppCompatActivity() {
     private fun sendMessage() {
         val email = _binding.editTextTextEmailAddress
         val password = _binding.editTextTextPassword
-        Viewauth()
         when {
             email.text.toString().isEmpty() -> {
                 alertFinal.createAlert("The email is mandatory", "Error")

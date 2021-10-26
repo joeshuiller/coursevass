@@ -7,6 +7,7 @@ import com.vass.coursevass.network.service.AuthServices
 import com.vass.coursevass.network.service.UserService
 import com.vass.coursevass.network.service.db.LoginDto
 import com.vass.coursevass.network.service.db.RegistrationDto
+import com.vass.coursevass.network.service.db.UserDto
 import com.vass.coursevass.storage.Storage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,7 @@ class serviceViewModel @Inject constructor(
     private val userService: UserService
 ) : ViewModel() {
     var auth = MutableLiveData<Boolean>()
+    var userRegister = MutableLiveData<List<UserDto>>()
     fun authLogin(email: String, password: String){
         viewModelScope.launch(Dispatchers.IO) {
             val loginResponse = authService.login(LoginDto(email, password))
@@ -43,6 +45,7 @@ class serviceViewModel @Inject constructor(
     fun listUsers(){
         viewModelScope.launch(Dispatchers.IO) {
             val loginResponse = userService.getUsersList()
+            userRegister.postValue(loginResponse.body())
         }
     }
 }
