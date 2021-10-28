@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.vass.coursevass.databinding.ActivityLoginBinding
 import com.vass.coursevass.utils.AlertBuild
 import com.vass.coursevass.network.service.AuthServices
-import com.vass.coursevass.storage.Storage
+import com.vass.coursevass.utils.storage.Storage
 import com.vass.coursevass.viewmodel.serviceViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

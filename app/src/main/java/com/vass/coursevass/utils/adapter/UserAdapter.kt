@@ -1,4 +1,4 @@
-package com.vass.coursevass.adapter
+package com.vass.coursevass.utils.adapter
 
 import android.view.LayoutInflater
 import android.view.View

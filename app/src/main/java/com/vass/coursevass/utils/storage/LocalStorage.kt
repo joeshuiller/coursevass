@@ -1,4 +1,4 @@
-package com.vass.coursevass.storage
+package com.vass.coursevass.utils.storage
 
 import android.content.Context
 import com.vass.coursevass.utils.SHARED_PREFERENCES_FILES_NAME

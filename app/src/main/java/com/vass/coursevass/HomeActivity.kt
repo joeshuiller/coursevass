@@ -23,8 +23,8 @@ import com.vass.coursevass.network.service.AuthServices
 import com.vass.coursevass.network.service.UserService
 import com.vass.coursevass.network.service.db.LoginDto
 import com.vass.coursevass.network.service.db.RegistrationDto
-import com.vass.coursevass.storage.LocalStorage
-import com.vass.coursevass.storage.Storage
+import com.vass.coursevass.utils.storage.LocalStorage
+import com.vass.coursevass.utils.storage.Storage
 import com.vass.coursevass.viewmodel.serviceViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
@@ -71,7 +71,7 @@ class HomeActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        autentication()
+        //autentication()
 
         // Get the Intent that started this activity and extract the string
     }

@@ -1,17 +1,29 @@
 package com.vass.coursevass.ui.home
 
 
-import androidx.lifecycle.LiveData
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.vass.coursevass.network.service.SaveTaskService
+import com.vass.coursevass.network.service.db.TaskListDto
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val listTask: SaveTaskService
+) : ViewModel() {
+    var taskRegister = MutableLiveData<List<TaskListDto>>()
+    fun getTaskList(){
+        viewModelScope.launch(Dispatchers.IO) {
+            val listaks = listTask.getTaskList()
+            if (listaks.isSuccessful) {
+                Log.d("verificacion", "esto ${listaks.body()}")
+                taskRegister.postValue(listaks.body())
+            }
+        }
     }
-    // Get the Intent that started this activity and extract the string
-
-    // Capture the layout's TextView and set the string as its text
-    val text: LiveData<String> = _text
 }

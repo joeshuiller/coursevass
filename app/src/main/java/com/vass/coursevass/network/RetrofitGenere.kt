@@ -6,7 +6,7 @@ package com.vass.coursevass.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.vass.coursevass.BuildConfig
-import com.vass.coursevass.storage.Storage
+import com.vass.coursevass.utils.storage.Storage
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

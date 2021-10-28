@@ -6,8 +6,9 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.vass.coursevass.BuildConfig
 import com.vass.coursevass.network.AuthInterceptor
 import com.vass.coursevass.network.service.AuthServices
+import com.vass.coursevass.network.service.SaveTaskService
 import com.vass.coursevass.network.service.UserService
-import com.vass.coursevass.storage.Storage
+import com.vass.coursevass.utils.storage.Storage
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import dagger.Module
@@ -51,5 +52,10 @@ object ServiceModule {
     @Singleton
     fun provideUserService(retrofit: Retrofit): UserService {
         return retrofit.create(UserService::class.java)
+    }
+    @Provides
+    @Singleton
+    fun provideSaveTaskService(retrofit: Retrofit): SaveTaskService {
+        return retrofit.create(SaveTaskService::class.java)
     }
 }

@@ -1,8 +1,8 @@
 package com.vass.coursevass.di
 
 import android.content.Context
-import com.vass.coursevass.storage.LocalStorage
-import com.vass.coursevass.storage.Storage
+import com.vass.coursevass.utils.storage.LocalStorage
+import com.vass.coursevass.utils.storage.Storage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +15,7 @@ import javax.inject.Singleton
 object DataModule {
     @Provides
     @Singleton
-    fun provideStorage(@ApplicationContext context: Context): Storage{
+    fun provideStorage(@ApplicationContext context: Context): Storage {
         return LocalStorage(context)
     }
 }

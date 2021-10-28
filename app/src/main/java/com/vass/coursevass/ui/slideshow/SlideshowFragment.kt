@@ -1,6 +1,7 @@
 package com.vass.coursevass.ui.slideshow
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +36,14 @@ class SlideshowFragment : Fragment() {
         slideshowViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+        val local = arguments?.getString("name")
+        val local1 = arguments?.getString("description")
+        val local2 = arguments?.getString("status")
+        val local3 = arguments?.getString("assignedTo")
+        Log.d("verificacion", "esto ${local}")
+        Log.d("verificacion", "esto ${local1}")
+        Log.d("verificacion", "esto ${local2}")
+        Log.d("verificacion", "esto ${local3}")
         return root
     }
 

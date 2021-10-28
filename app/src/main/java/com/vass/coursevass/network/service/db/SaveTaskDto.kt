@@ -2,11 +2,11 @@ package com.vass.coursevass.network.service.db
 
 import java.util.*
 
-class SaveTaskDto (
-    name: String,
-    description:String,
-    status:String,
-    assignedTo:String,
-    dueDate:Date
+data class SaveTaskDto (
+    val name: String,
+    val description:String,
+    val status:String ,
+    val assignedTo:String,
+    val dueDate:Date
 )
 

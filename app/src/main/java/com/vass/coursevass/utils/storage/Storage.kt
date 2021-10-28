@@ -1,4 +1,4 @@
-package com.vass.coursevass.storage
+package com.vass.coursevass.utils.storage
 
 interface Storage {
     fun saveToken(token: String)

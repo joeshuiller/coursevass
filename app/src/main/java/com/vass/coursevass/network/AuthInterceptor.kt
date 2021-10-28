@@ -1,6 +1,6 @@
 package com.vass.coursevass.network
 
-import com.vass.coursevass.storage.Storage
+import com.vass.coursevass.utils.storage.Storage
 import com.vass.coursevass.utils.AUTHORIZATION
 import okhttp3.Interceptor
 import okhttp3.Response

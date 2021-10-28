@@ -12,7 +12,7 @@ import android.provider.AlarmClock
 import android.view.WindowInsets
 import android.view.WindowManager
 import com.vass.coursevass.databinding.ActivitySplashScreenBinding
-import com.vass.coursevass.storage.Storage
+import com.vass.coursevass.utils.storage.Storage
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -42,7 +42,7 @@ class SplashScreen : AppCompatActivity() {
             binding.progressBar.progressTintList = ColorStateList.valueOf(Color.WHITE)
         }
         val timer: CountDownTimer
-        timer = object : CountDownTimer(6000, 100) {
+        timer = object : CountDownTimer(3000, 100) {
             override fun onTick(millisUntilFinished: Long) {
 
             }
