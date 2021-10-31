@@ -11,21 +11,21 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.vass.coursevass.R
 import com.vass.coursevass.network.service.db.TaskListDto
+import com.vass.coursevass.ui.home.CellClickListener
 
 
-
-
-
-class TaskAdapter (private val dataSet: List<TaskListDto>) :
-    RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
+class TaskAdapter(private val context: Context, private val dataSet: List<TaskListDto>,
+                  private val cellClickListener: CellClickListener
+) :
+    RecyclerView.Adapter<TaskAdapter.ViewHolder>(){
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val infoText: TextView = view.findViewById(R.id.info_text)
-        val description: TextView = view.findViewById(R.id.description)
+        val infoText: TextView = view.findViewById(R.id.item_title)
+        val description: TextView = view.findViewById(R.id.item_descrip)
 
         init {
             // Define click listener for the ViewHolder's View.
@@ -35,13 +35,13 @@ class TaskAdapter (private val dataSet: List<TaskListDto>) :
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
-        val view = LayoutInflater.from(viewGroup.context)
+        val view = LayoutInflater.from(context)
             .inflate(R.layout.card_task, viewGroup, false)
         val data = dataSet[viewType]
         view.setOnClickListener(View.OnClickListener { v ->
-            Log.d("verificacion", "esto $data")
             val bundle = bundleOf("id" to data.id, "name" to data.name, "description" to data.description, "assignedTo" to data.assignedTo,"status" to data.status)
-            v.findNavController().navigate(R.id.nav_slideshow, bundle)
+            Log.d("verificacion", "esto $bundle")
+            v.findNavController().navigate(R.id.nav_detailshow, bundle)
         })
         return ViewHolder(view)
     }
@@ -54,11 +54,13 @@ class TaskAdapter (private val dataSet: List<TaskListDto>) :
         val data = dataSet[position]
         viewHolder.infoText.text = data.name
         viewHolder.description.text = data.description
+        viewHolder.itemView.setOnClickListener {
+            cellClickListener.onCellClickListener(data)
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount(): Int {
         return dataSet.size
     }
-
 }
