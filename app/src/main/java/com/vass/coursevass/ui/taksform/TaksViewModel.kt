@@ -1,35 +1,34 @@
-package com.vass.coursevass.ui.home
-
+package com.vass.coursevass.ui.taksform
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vass.coursevass.network.service.TaskService
-import com.vass.coursevass.network.service.db.TaskListDto
+import com.vass.coursevass.network.service.db.SaveTaskDto
 import com.vass.coursevass.utils.storage.Storage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class TaksViewModel @Inject constructor(
     private val listTask: TaskService,
     private var storage: Storage
-) : ViewModel() {
-    var taskRegister = MutableLiveData<List<TaskListDto>>()
+): ViewModel() {
+    var saveTaskDto = MutableLiveData<SaveTaskDto>()
     var auth = MutableLiveData<Boolean>()
-    fun getTaskList(){
+    fun saveTask(name: String, description:String, status:String , assignedTo:String, dueDate:Date){
         viewModelScope.launch(Dispatchers.IO) {
-            val listaks = listTask.getTaskList()
-            if (listaks.isSuccessful) {
-                Log.d("verificacion", "esto ${listaks.body()}")
-                taskRegister.postValue(listaks.body())
-                auth.postValue(listaks.isSuccessful)
+            val lists = listTask.saveTask(SaveTaskDto(name,description,status,assignedTo,dueDate))
+            if (lists.isSuccessful) {
+                Log.d("verificacion", "esto ${lists.body()}")
+                saveTaskDto.postValue(lists.body())
             }
-            var status: Int = listaks.code()
-            when (status) {
+            var statusfinal: Int = lists.code()
+            when (statusfinal) {
                 400 -> {
                     auth.postValue(false)
                     storage.clearToken()

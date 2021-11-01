@@ -2,13 +2,8 @@ package com.vass.coursevass
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.Button
-import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -17,18 +12,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.vass.coursevass.databinding.ActivityHomeBinding
-import com.vass.coursevass.network.RetrofitGenere
-import com.vass.coursevass.network.service.AuthServices
-import com.vass.coursevass.network.service.UserService
-import com.vass.coursevass.network.service.db.LoginDto
-import com.vass.coursevass.network.service.db.RegistrationDto
-import com.vass.coursevass.utils.storage.LocalStorage
 import com.vass.coursevass.utils.storage.Storage
 import com.vass.coursevass.viewmodel.serviceViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -55,10 +44,7 @@ class HomeActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarHome.toolbar)
 
-        binding.appBarHome.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_home)
@@ -66,11 +52,14 @@ class HomeActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home, R.id.nav_taks, R.id.nav_slideshow
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        binding.appBarHome.fab.setOnClickListener {
+            Navigation.findNavController(this, R.id.nav_host_fragment_content_home).navigate(R.id.nav_taks)
+        }
         //autentication()
 
         // Get the Intent that started this activity and extract the string

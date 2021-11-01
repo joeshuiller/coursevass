@@ -19,8 +19,10 @@
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_taks.xml" value="0.23960612691466082" />
         <entry key="app/src/main/res/layout/nav_header_home.xml" value="0.1" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.1140625" />
+        <entry key="app/src/main/res/menu/home.xml" value="0.11296296296296296" />
       </map>
     </option>
   </component>

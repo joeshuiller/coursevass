@@ -6,19 +6,19 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.vass.coursevass.BuildConfig
 import com.vass.coursevass.network.AuthInterceptor
 import com.vass.coursevass.network.service.AuthServices
-import com.vass.coursevass.network.service.SaveTaskService
+import com.vass.coursevass.network.service.TaskService
 import com.vass.coursevass.network.service.UserService
 import com.vass.coursevass.utils.storage.Storage
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 
 @Module
@@ -55,7 +55,7 @@ object ServiceModule {
     }
     @Provides
     @Singleton
-    fun provideSaveTaskService(retrofit: Retrofit): SaveTaskService {
-        return retrofit.create(SaveTaskService::class.java)
+    fun provideSaveTaskService(retrofit: Retrofit): TaskService {
+        return retrofit.create(TaskService::class.java)
     }
 }

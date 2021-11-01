@@ -21,7 +21,13 @@
     <string name="required_email">The email is mandatory</string>
     <string name="required_password">Password is required</string>
     <string name="loading">Loading...</string>
+    <string name="name">Name:</string>
+    <string name="description">Description:</string>
+    <string name="status">Status:</string>
+    <string name="assignedTo">AssignedTo:</string>
+    <string name="dueDate">DueDate:</string>
     <string name="logout">Logout</string>
+    <string name="create">Create</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
